@@ -1,190 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus ID</title>
+{% extends 'core/base.html' %}
 
-    <style>
+{% block titulo %}
+Dashboard - Campus ID
+{% endblock %}
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Segoe UI, sans-serif;
-        }
+{% block contenido %}
 
-        body{
-            display:flex;
-            background:#f4f6f9;
-        }
+<h1>Dashboard</h1>
 
-        /* SIDEBAR */
+<br>
 
-        .sidebar{
-            width:260px;
-            height:100vh;
-            background:#0f172a;
-            color:white;
-            position:fixed;
-            left:0;
-            top:0;
-        }
+<div class="cards">
 
-        .logo{
-            padding:25px;
-            text-align:center;
-            border-bottom:1px solid #1e293b;
-        }
+    <div class="card">
+        <h3>Total Estudiantes</h3>
+        <p>{{ total_estudiantes }}</p>
+    </div>
 
-        .logo h2{
-            color:#38bdf8;
-        }
+    <div class="card">
+        <h3>Huellas Registradas</h3>
+        <p>{{ total_huellas }}</p>
+    </div>
 
-        .menu{
-            margin-top:20px;
-        }
+    <div class="card">
+        <h3>Asistencias Hoy</h3>
+        <p>{{ asistencias_hoy }}</p>
+    </div>
 
-        .menu a{
-            display:block;
-            color:white;
-            text-decoration:none;
-            padding:15px 25px;
-            transition:0.3s;
-        }
+    <div class="card">
+        <h3>Última Asistencia</h3>
 
-        .menu a:hover{
-            background:#1e293b;
-        }
-
-        /* CONTENIDO */
-
-        .main{
-            margin-left:260px;
-            width:100%;
-            padding:30px;
-        }
-
-        .header{
-            margin-bottom:30px;
-        }
-
-        .header h1{
-            color:#0f172a;
-        }
-
-        .cards{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:20px;
-        }
-
-        .card{
-            background:white;
-            padding:25px;
-            border-radius:12px;
-            box-shadow:0px 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .card h3{
-            color:#64748b;
-            margin-bottom:10px;
-        }
-
-        .card p{
-            font-size:28px;
-            font-weight:bold;
-            color:#0f172a;
-        }
-
-        .welcome{
-            background:white;
-            margin-top:30px;
-            padding:25px;
-            border-radius:12px;
-            box-shadow:0px 2px 10px rgba(0,0,0,0.1);
-        }
-
-    </style>
-
-</head>
-<body>
-
-    <div class="sidebar">
-
-        <div class="logo">
-            <h2>Campus ID</h2>
-            <p>Sistema Académico</p>
-        </div>
-
-        <div class="menu">
-
-            <a href="#">🏠 Dashboard</a>
-
-            <a href="#">👨‍🎓 Estudiantes</a>
-
-            <a href="#">🖐️ Huellas</a>
-
-            <a href="#">📋 Asistencias</a>
-
-            <a href="#">⚙️ Configuración</a>
-
-        </div>
+        <p>
+            {% if ultima_asistencia %}
+                {{ ultima_asistencia.estudiante.nombre }}
+            {% else %}
+                --
+            {% endif %}
+        </p>
 
     </div>
 
-    <div class="main">
+</div>
 
-        <div class="header">
-            <h1>Panel de Control</h1>
-            <p>Bienvenido al sistema Campus ID</p>
-        </div>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>Total Estudiantes</h3>
-                <p>{{ total_estudiantes }}</p><h3>Total Estudiantes</h3>
-                <p>0</p>
-            </div>
-
-            <div class="card">
-                <h3>Huellas Registradas</h3>
-                <p>{{ total_huellas }}</p>
-            </div>
-
-            <div class="card">
-                <h3>Asistencias Hoy</h3>
-                <p>{{ asistencias_hoy }}</p>
-            </div>
-
-            <div class="card">
-                <h3>Última Asistencia</h3>
-                <p>
-                    {% if ultima_asistencia %}
-                    {{ ultima_asistencia.estudiante.nombre }}
-                    {% else %}
-                       --
-                    {% endif %}
-                </p>
-            </div>
-
-        </div>
-
-        <div class="welcome">
-
-            <h2>Campus ID</h2>
-
-            <br>
-
-            <p>
-                Sistema inteligente de control de asistencia académica
-                mediante reconocimiento biométrico por huella digital.
-            </p>
-
-        </div>
-
-    </div>
-
-</body>
-</html>
+{% endblock %}

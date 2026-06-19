@@ -27,3 +27,15 @@ def dashboard(request):
         'core/dashboard.html',
         contexto
     )
+
+def estudiantes(request):
+
+    estudiantes = Estudiante.objects.all().order_by('nombre')
+
+    return render(
+        request,
+        'core/estudiantes.html',
+        {
+            'estudiantes': estudiantes
+        }
+    )
